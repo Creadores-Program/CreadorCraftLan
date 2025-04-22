@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.net.Uri;
 import android.content.Intent;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.graphics.Color;
 import org.CreadoresProgram.CreadorCraftLan.services.CreadorCraftLanServerService;
 
 public class MainActivity extends Activity {
@@ -23,6 +25,12 @@ public class MainActivity extends Activity {
             }
             finish();
             return;
+        }else{
+            setContentView(R.layout.layout_main);
+            WebView webView = findViewById(R.id.webview);
+            webView.setWebViewClient(new WebViewClient());
+            webView.setBackgroundColor(Color.BLACK);
+            webView.loadUrl("file:///android_asset/MainActivity.html");
         }
     }
     private void LoadServer(String baseData){

@@ -3,6 +3,7 @@ import android.app.Service;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.ValueCallback;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -17,6 +18,7 @@ import android.util.Base64;
 import java.nio.charset.StandardCharsets;
 import org.CreadoresProgram.CreadorCraftLan.Utils.ChromeExtra;
 import org.CreadoresProgram.CreadorCraftLan.MainActivity;
+import org.CreadoresProgram.CreadorCraftLan.apiJS.Android;
 import android.os.IBinder;
 import org.json.JSONArray;
 import org.CreadoresProgram.CreadorCraftLan.apiJS.ServerWebGamePostServerJS;
@@ -67,9 +69,28 @@ public class CreadorCraftLanServerService extends Service{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                if(url.equals("file:///android_asset/LanServerAPI/Load.html")){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request){
+                String url = request.getUrl().toString();
+                if(url.equals("file:///android_asset/LanServerAPI/Load.html")){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        });
         webView.setWebChromeClient(new ChromeExtra());
         webView.addJavascriptInterface(new ServerWebGamePostServerJS(webView), "ServerWebGamePostServerJava");
+        webView.addJavascriptInterface(new Android(this), "Android");
         webView.loadUrl("file:///android_asset/LanServerAPI/Load.html");
     }
     private void evalJS(String code){
