@@ -105,7 +105,7 @@ public class CreadorCraftLanServerService extends Service{
                             public void run(){
                                 webView.evaluateJavascript("eval("+value+");", null);
                             }
-                        })
+                        });
                     }
                 });
             }
@@ -129,22 +129,37 @@ public class CreadorCraftLanServerService extends Service{
         return null;
     }
     private void registerFile(String code, String fileDir){
-        webView.post(new Runnable(){
-            @Override
-            public void run(){
-                webView.evaluateJavascript("Babel.transform("+org.json.JSONObject.quote(code)+", {presets:['es2015']}).code", new ValueCallback<String>(){
-                    @Override
-                    public void onReceiveValue(String value){
-                        webView.post(new Runnable(){
-                            @Override
-                            public void run(){
-                                webView.evaluateJavascript("if("+org.json.JSONObject.quote(fileDir)+".endsWith('.json')){ require.register("+org.json.JSONObject.quote(fileDir)+", function(module){ module.exports = JSON.parse("+value+"); }); }else{ require.register("+org.json.JSONObject.quote(fileDir)+", "+value+"); }", null);
-                            }
-                        })
-                    }
-                });
-            }
-        });
+        if(fileDir.toLowerCase().endsWith(".js")){
+            webView.post(new Runnable(){
+                public void run(){
+                    webView.evaluateJavascript("Babel.transform("+org.json.JSONObject.quote(code)+", {presets:['es2015']}).code", new ValueCallback<String>(){
+                        @Override
+                        public void onReceiveValue(String value){
+                            webView.post(new Runnable(){
+                                @Override
+                                public void run(){
+                                    webView.evaluateJavascript("require.register("+org.json.JSONObject.quote(fileDir)+", "+value+");", null);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }else if(fileDir.toLowerCase().endsWith(".json")){
+            webView.post(new Runnable(){
+                @Override
+                public void run(){
+                    webView.evaluateJavascript("require.register("+org.json.JSONObject.quote(fileDir)+", function(module){ module.exports = JSON.parse("+org.json.JSONObject.quote(code)+"); });", null);
+                }
+            });
+        }else{
+            webView.post(new Runnable(){
+                @Override
+                public void run(){
+                    webView.evaluateJavascript("require.register("+org.json.JSONObject.quote(fileDir)+", function(module){ module.exports = "+org.json.JSONObject.quote(code)+"; });", null);
+                }
+            });
+        }
     }
     private Notification getNotification(){
         int pendingIntentFlags;
