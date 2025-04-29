@@ -109,9 +109,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <groupId>com.github.akman</groupId>
                 <artifactId>jpackage-maven-plugin</artifactId>
-                <version>0.1.0</version>
+                <version>0.1.5</version>
                 <executions>
                     <execution>
                         <id>jpackage-linux</id>
