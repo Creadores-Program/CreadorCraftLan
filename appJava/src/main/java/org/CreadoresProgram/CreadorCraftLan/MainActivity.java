@@ -24,7 +24,7 @@ public class MainActivity extends Application{
     private static void showSystemNotification(String title, String message) {
       if (SystemTray.isSupported()) {
         SystemTray tray = SystemTray.getSystemTray();
-        Image image = new Image(getClass().getResource("/ic_launcher.jpeg").toExternalForm());
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ic_launcher.jpeg"));
 
         TrayIcon trayIcon = new TrayIcon(image, "CreadorCraft Lan");
         trayIcon.setImageAutoSize(true);
