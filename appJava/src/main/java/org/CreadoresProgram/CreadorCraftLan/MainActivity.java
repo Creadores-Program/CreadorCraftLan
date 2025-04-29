@@ -6,7 +6,7 @@ import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
 import javafx.concurrent.Worker;
 import javafx.stage.Stage;
-import javafx.layout.StackPane;
+import javafx.scene.layout.StackPane;
 import java.awt.SystemTray;
 import java.awt.Desktop;
 import java.awt.TrayIcon;
