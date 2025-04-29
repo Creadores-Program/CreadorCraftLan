@@ -5,6 +5,7 @@ import org.graalvm.polyglot.Source;
 import org.CreadoresProgram.CreadorCraftLan.apiJS.*;
 import org.CreadoresProgram.CreadorCraftLan.MainActivity;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Base64;
@@ -40,7 +41,7 @@ public class CreadorCraftLanServerService{
             this.contextJS.eval("js", "let maniloa = require('manifest.json');\nlet mainJS = require(maniloa.main);\nmainJS.onLoad();");
             this.contextJS.eval("js", "CCLAPI.dispatchEvent(new CustomEvent('start', { cancelable: false }));");
         }catch(Exception err){
-            System.err.println("Error al ejecutar JS!", err);
+            System.err.println("Error al ejecutar JS!" + err.getMessage());
         }
     }
     private Source loadScriptFromResources(String resourcePath) throws IOException {
@@ -63,11 +64,11 @@ public class CreadorCraftLanServerService{
             this.contextJS.eval("js", "require.register("+JSON.toJSONString(fileDir)+", function(module){ module.exports = "+JSON.toJSONString(code)+"; });");
         }
       }catch(Exception err){
-        System.err.println("Error al ejecutar JS!", err);
+        System.err.println("Error al ejecutar JS!" + err.getMessage());
       }
     }
     private void getNotification(){
-        DesktopNotify.showDesktopMessage("CreadorCraftLan Service Server", "Servidor Iniciado!", DesktopNotify.DEFAULT, new Image(MainActivity.getClass().getResource("/ic_notification.png").toExternalForm()), (evt)->{
+        DesktopNotify.showDesktopMessage("CreadorCraftLan Service Server", "Servidor Iniciado!", DesktopNotify.DEFAULT, Toolkit.getDefaultToolkit().getImage(MainActivity.getClass().getResource("/ic_notification.png")), (evt)->{
             contextJS.eval("js", "CCLAPI.dispatchEvent(new CustomEvent('stop', { cancelable: false }));");
             contextJS.close();
         });
