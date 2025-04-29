@@ -19,12 +19,12 @@ import java.io.IOException;
 import java.net.URL;
 import org.CreadoresProgram.CreadorCraftLan.services.CreadorCraftLanServerService;
 public class MainActivity extends Application{
-    private String uriScheme = "OpenCreadorCraftLan://";
+    private static String uriScheme = "OpenCreadorCraftLan://";
     private WebView webView;
     private static void showSystemNotification(String title, String message) {
       if (SystemTray.isSupported()) {
         SystemTray tray = SystemTray.getSystemTray();
-        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ic_launcher.jpeg"));
+        Image image = Toolkit.getDefaultToolkit().getImage(MainActivity.class.getResource("/ic_launcher.jpeg"));
 
         TrayIcon trayIcon = new TrayIcon(image, "CreadorCraft Lan");
         trayIcon.setImageAutoSize(true);
