@@ -68,7 +68,7 @@ public class CreadorCraftLanServerService{
       }
     }
     private void getNotification(){
-        DesktopNotify.showDesktopMessage("CreadorCraftLan Service Server", "Servidor Iniciado!", DesktopNotify.DEFAULT, Toolkit.getDefaultToolkit().getImage(MainActivity.getClass().getResource("/ic_notification.png")), (evt)->{
+        DesktopNotify.showDesktopMessage("CreadorCraftLan Service Server", "Servidor Iniciado!", DesktopNotify.DEFAULT, Toolkit.getDefaultToolkit().getImage(MainActivity.class.getResource("/ic_notification.png")), (evt)->{
             contextJS.eval("js", "CCLAPI.dispatchEvent(new CustomEvent('stop', { cancelable: false }));");
             contextJS.close();
         });

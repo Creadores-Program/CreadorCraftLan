@@ -66,14 +66,14 @@ public class MainActivity extends Application{
     public void start(Stage primaryStage){
         this.webView = new WebView();
         WebEngine webEngine = this.webView.getEngine();
-        String currentLoadedUrl;
+        final String[] currentLoadedUrl = { "" };
         webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
-                currentLoadedUrl = webEngine.getLocation();
+                currentLoadedUrl[0] = webEngine.getLocation();
             }
         });
         webEngine.locationProperty().addListener((observable, oldLocation, newLocation) -> {
-            if (newLocation == null || newLocation.equals(currentLoadedUrl) || newLocation.equals(oldLocation)) {
+            if (newLocation == null || newLocation.equals(currentLoadedUrl[0]) || newLocation.equals(oldLocation)) {
                 return;
             }
             if(newLocation.equals("https://creadorcraft.com")){
@@ -81,7 +81,7 @@ public class MainActivity extends Application{
                     if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                         Desktop.getDesktop().browse(new URI("https://creadorcraftcp.blogspot.com/"));
                     }
-                    final String urlToRestore = (oldLocation != null && !oldLocation.equals("about:blank")) ? oldLocation : currentLoadedUrl;
+                    final String urlToRestore = (oldLocation != null && !oldLocation.equals("about:blank")) ? oldLocation : currentLoadedUrl[0];
                     if (urlToRestore != null && !urlToRestore.equals(newLocation)) {
                         Platform.runLater(() -> {
                              webEngine.load(urlToRestore);
@@ -89,11 +89,11 @@ public class MainActivity extends Application{
                     }
                 }catch(URISyntaxException e){
                     showSystemNotification("CreadorCraft LAN", "URL mal formada, no se puede abrir!");
-                    final String urlToRestore = (oldLocation != null && !oldLocation.equals("about:blank")) ? oldLocation : currentLoadedUrl;
+                    final String urlToRestore = (oldLocation != null && !oldLocation.equals("about:blank")) ? oldLocation : currentLoadedUrl[0];
                     if (urlToRestore != null) Platform.runLater(() -> webEngine.load(urlToRestore));
                 }catch(Exception err){
                     showSystemNotification("CreadorCraft LAN", "URL mal formada, no se puede abrir!");
-                    final String urlToRestore = (oldLocation != null && !oldLocation.equals("about:blank")) ? oldLocation : currentLoadedUrl;
+                    final String urlToRestore = (oldLocation != null && !oldLocation.equals("about:blank")) ? oldLocation : currentLoadedUrl[0];
                     if (urlToRestore != null) Platform.runLater(() -> webEngine.load(urlToRestore));
                 }
             }
