@@ -7,7 +7,7 @@ import lombok.NonNull;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
-import androidx.annotation.Nullable;
+import javax.annotation.Nullable;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSON;
