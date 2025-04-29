@@ -1,0 +1,4 @@
+set -e
+update-mime-database /usr/share/mime > /dev/null || true
+update-desktop-database /usr/shareapplications > /dev/null || true
+exit 0

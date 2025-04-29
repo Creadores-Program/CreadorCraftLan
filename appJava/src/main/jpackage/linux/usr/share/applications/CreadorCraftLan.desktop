@@ -1,0 +1,11 @@
+[DesktopEntry]
+Version=1.0.0-beta
+Name=CreadorCraftLan
+Comment=Crea Servidores LAN fácilmente para Juegos de CreadorCraft
+Exec=/opt/bin/CreadorCraftLan %u
+Icon=CreadorCraftLan
+Terminal=false
+Type=Application
+Categories=Game;Network;
+MimeType=x-scheme-handler/opencreadorcraftlan;
+Keywords=CreadorCraft;Maker;Server;LAN;

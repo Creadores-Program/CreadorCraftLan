@@ -9,9 +9,15 @@
     <version>1.0.0-beta</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <main.class>org.CreadoresProgram.CreadorCraftLan.MainActivity</main.class>
+        <app.name>CreadorCraftLan</app.name>
+        <app.version>${project.version}</app.version>
+        <jpackage.output.dir>${project.build.directory}/jpackage-output</jpackage.output.dir>
+        <jpackage.resource.dir>${project.basedir}/src/main/jpackage/linux</jpackage.resource.dir>
+        <linux.install.dir>/opt</linux.install.dir>
         <graalvm.version>22.3.3</graalvm.version>
         <javafx.version>17.0.10</javafx.version>
     </properties>
@@ -65,4 +71,70 @@
             <version>v0.91</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${main.class}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <finalName>${project.artifactId}-${project.version}-exec</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>0.1.5</version>
+                <executions>
+                    <execution>
+                        <id>jpackage-linux</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jpackage</goal>
+                        </goals>
+                        <configuration>
+                            <name>${app.name}</name>
+                            <version>${app.version}</version>
+                            <mainClass>${main.class}</mainClass>
+                            <mainJar>${project.build.directory}/${project.artifactId}-${project.version}-exec.jar</mainJar>
+                            <type>deb</type>
+                            <linuxPackageName>${app.name}</linuxPackageName>
+                            <linuxInstallDir>${linux.install.dir}</linuxInstallDir>
+                            <resourceDir>${jpackage.resource.dir}</resourceDir>
+                            <outputDirectory>${jpackage.output.dir}</outputDirectory>
+                            <linuxShortcut>true</linuxShortcut>
+                            <linuxMenuGroup>Game</linuxMenuGroup>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
