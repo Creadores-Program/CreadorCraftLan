@@ -23,7 +23,7 @@ public class CreadorCraftLanServerService{
             this.contextJS.getBindings("js").putMember("ServerWebGamePostServerJava", new ServerWebGamePostServerJS(this.contextJS));
             this.contextJS.getBindings("js").putMember("SystemJava", new SystemJS());
             this.contextJS.eval(loadScriptFromResources("/libsJS/require.min.js"));
-            this.contextJS.eval(loadScriptFromResources("/libsJS/customEventPoly.js"))
+            this.contextJS.eval(loadScriptFromResources("/libsJS/customEventPoly.js"));
             this.contextJS.eval(loadScriptFromResources("/libsJS/ServerWebGamePostClient.js"));
             this.contextJS.eval(loadScriptFromResources("/libsJS/ServerWebGamePostServer.js"));
             this.contextJS.eval(loadScriptFromResources("/libsJS/CCLAPI.js"));
