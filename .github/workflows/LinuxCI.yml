@@ -31,8 +31,7 @@ jobs:
             --file-associations resourcesLinux/opencreadorcraftlan.assoc \
             --dest appJava/target/image \
             --linux-deb-maintainer "https://github.com/Creadores-Program/" \
-            --linux-shortcut \
-            --linux-deb-description "Crea Servidores LAN fácilmente para Juegos de CreadorCraft"
+            --linux-shortcut
       - name: UploadArtifact
         uses: actions/upload-artifact@v4
         with:
