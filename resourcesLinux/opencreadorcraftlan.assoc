@@ -1,0 +1,4 @@
+extension=opencreadorcraftlan
+mime-type=x-scheme-handler/opencreadorcraftlan
+description=Iniciar Servidores Lan de CreadorCraft
+icon=appJava/src/main/resources/ic_launcher.jpeg
