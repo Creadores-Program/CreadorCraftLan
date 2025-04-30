@@ -7,17 +7,14 @@
     <groupId>org.creadoresprogram</groupId>
     <artifactId>CreadorCraftLan</artifactId>
     <version>1.0.0-beta</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <main.class>org.CreadoresProgram.CreadorCraftLan.MainActivity</main.class>
+        <mainClass>org.CreadoresProgram.CreadorCraftLan.MainActivity</mainClass>
         <app.name>CreadorCraftLan</app.name>
-        <app.version>${project.version}</app.version>
-        <jpackage.output.dir>${project.build.directory}/jpackage-output</jpackage.output.dir>
-        <jpackage.resource.dir>${project.basedir}/src/main/jpackage/linux</jpackage.resource.dir>
-        <linux.install.dir>/opt</linux.install.dir>
         <graalvm.version>22.3.3</graalvm.version>
         <javafx.version>17.0.10</javafx.version>
     </properties>
@@ -78,60 +75,39 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <release>${maven.compiler.source}</release>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.6.0</version>
+                <groupId>org.beryx</groupId>
+                <artifactId>badass-jlink-plugin</artifactId>
+                <version>2.24.0</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>${main.class}</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <finalName>${project.artifactId}-${project.version}-exec</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
+                    <launcherName>${app.name}</launcherName>
+                    <jpackageImageOptions>
+                        <icon>src/main/resources/ic_launcher.jpeg</icon>
+                        <linuxShortcut>true</linuxShortcut>
+                    </jpackageImageOptions>
+                    <jpackageOptions>
+                        <type>deb</type>
+                        <linuxDebMaintainer>https://github.com/Creadores-Program/</linuxDebMaintainer>
+                        <linuxDebDescription>Crea Servidores LAN fácilmente para Juegos de CreadorCraft</linuxDebDescription>
+                    </jpackageOptions>
+                    <fileAssociations>
+                        <fileAssociation>
+                            <extension>opencreadorcraftlan</extension>
+                            <mimeType>x-scheme-handler/opencreadorcraftlan</mimeType>
+                            <description>Iniciar Servidores Lan de CreadorCraft</description>
+                            <icon>src/main/resources/ic_launcher.jpeg</icon>
+                        </fileAssociation>
+                    </fileAssociations>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.github.akman</groupId>
-                <artifactId>jpackage-maven-plugin</artifactId>
-                <version>0.1.5</version>
-                <executions>
-                    <execution>
-                        <id>jpackage-linux</id>
-                        <phase>package</phase>
+                        <id>jpackage</id>
                         <goals>
                             <goal>jpackage</goal>
                         </goals>
-                        <configuration>
-                            <name>${app.name}</name>
-                            <version>${app.version}</version>
-                            <mainClass>${main.class}</mainClass>
-                            <mainJar>${project.build.directory}/${project.artifactId}-${project.version}-exec.jar</mainJar>
-                            <type>deb</type>
-                            <linuxPackageName>${app.name}</linuxPackageName>
-                            <linuxInstallDir>${linux.install.dir}</linuxInstallDir>
-                            <resourceDir>${jpackage.resource.dir}</resourceDir>
-                            <outputDirectory>${jpackage.output.dir}</outputDirectory>
-                            <linuxShortcut>true</linuxShortcut>
-                            <linuxMenuGroup>Game</linuxMenuGroup>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

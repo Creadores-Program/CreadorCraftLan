@@ -17,9 +17,13 @@ jobs:
       - name: SetUpLinuxFiles
         run: |
           cp resourcesLinux/pom.xml appJava/
-          chmod +x appJava/src/main/jpackage/linux/DEBIAN/postinst
       - name: Build with Maven
         run: |
           mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=appJava/libs/DS-Desktop-Notify.jar -DgroupId=ds.descktop -DartifactId=DS-Desktop-Notify -Dversion=v0.91 -Dpackaging=jar -DgeneratePom=true
           mvn -B package --file appJava/pom.xml
+      - name: UploadArtifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CreadorCraftLan-Linux
+          path: appJava/target/image/CreadorCraftLan.deb
           
