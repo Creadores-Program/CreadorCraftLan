@@ -37,5 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: CreadorCraftLan-Linux
-          path: appJava/target/image/CreadorCraftLan.deb
-          
+          path: appJava/target/image/*
