@@ -15,10 +15,12 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
       - name: Build with Maven
+        shell: cmd
         run: |
           mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile="${{ github.workspace }}\appJava\libs\DS-Desktop-Notify.jar" -DgroupId=ds.descktop -DartifactId=DS-Desktop-Notify -Dversion=v0.91 -Dpackaging=jar -DgeneratePom=true
           mvn -B package --file ${{ github.workspace }}\appJava\pom.xml
       - name: Build Windows App
+        shell: cmd
         run: |
           jpackage ^
             --name CreadorCraftLan ^
