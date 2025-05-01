@@ -1,0 +1,25 @@
+name: Java11CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
+    strategy:
+      matrix:
+        java: [ '11' ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+      - name: Build with Maven
+        run: |
+          mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=appJava/libs/DS-Desktop-Notify.jar -DgroupId=ds.descktop -DartifactId=DS-Desktop-Notify -Dversion=v0.91 -Dpackaging=jar -DgeneratePom=true
+          mvn -B package --file appJava/pom.xml
+      - name: UploadArtifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CreadorCraftLan-Java11
+          path: appJava/target/CreadorCraftLan-1.0.0-beta.jar
