@@ -23,15 +23,15 @@ jobs:
         shell: cmd
         run: |
           jpackage ^
-            --name CreadorCraftLan ^
-            --app-version 1.0.0-beta ^
-            --input "${{ github.workspace }}\appJava\target\" ^
-            --main-jar "\CreadorCraftLan-1.0.0-beta.jar" ^
-            --main-class org.CreadoresProgram.CreadorCraftLan.MainActivity ^
-            --icon "${{ github.workspace }}\appJava\src\main\resources\ic_launcher.ico" ^
-            --type exe ^
-            --file-associations "${{ github.workspace }}\resourcesWindows\opencreadorcraftlan.assoc" ^
-            --dest "${{ github.workspace }}\appJava\target\image" ^
+            --name CreadorCraftLan `
+            --app-version 1.0.0-beta `
+            --input "${{ github.workspace }}\appJava\target\" `
+            --main-jar "\CreadorCraftLan-1.0.0-beta.jar" `
+            --main-class org.CreadoresProgram.CreadorCraftLan.MainActivity `
+            --icon "${{ github.workspace }}\appJava\src\main\resources\ic_launcher.ico" `
+            --type exe `
+            --file-associations "${{ github.workspace }}\resourcesWindows\opencreadorcraftlan.assoc" `
+            --dest "${{ github.workspace }}\appJava\target\image" `
             --verbose
       - name: UploadArtifact
         uses: actions/upload-artifact@v4
