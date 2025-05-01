@@ -25,7 +25,7 @@ jobs:
       - name: Build Windows App
         shell: cmd
         run: |
-          jpackage  --name CreadorCraftLan --app-version 1.0 --input "${{ github.workspace }}\\appJava\\target" --main-jar CreadorCraftLan-1.0.0-beta.jar --main-class org.CreadoresProgram.CreadorCraftLan.MainActivity --icon "appJava\\src\\main\\resources\\iclauncher.ico" --type exe --file-associations "${{ github.workspace }}\\resourcesWindows\\opencreadorcraftlan.assoc" --dest "${{ github.workspace }}\\appJava\\target\\image" --verbose
+          jpackage  --name CreadorCraftLan --app-version 1.0 --input "${{ github.workspace }}\\appJava\\target" --main-jar CreadorCraftLan-1.0.0-beta.jar --main-class org.CreadoresProgram.CreadorCraftLan.MainActivity --icon "appJava\\src\\main\\resources\\iclauncher" --type exe --file-associations "${{ github.workspace }}\\resourcesWindows\\opencreadorcraftlan.assoc" --dest "${{ github.workspace }}\\appJava\\target\\image" --verbose
       - name: UploadArtifact
         uses: actions/upload-artifact@v4
         with:
