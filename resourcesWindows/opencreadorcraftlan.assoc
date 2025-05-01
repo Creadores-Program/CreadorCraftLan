@@ -1,4 +1,4 @@
 extension=.opencreadorcraftlan
 mime-type=application/x-opencreadorcraftlan
 description=Iniciar Servidores Lan de CreadorCraft
-icon=appJava\src\main\resources\ic_launcher.ico
+icon=appJava\\src\\main\\resources\\iclauncher.ico
