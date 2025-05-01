@@ -25,7 +25,7 @@ jobs:
             --name CreadorCraftLan `
             --app-version 1.0.0-beta `
             --input "${{ github.workspace }}\appJava\target\" `
-            --main-jar CreadorCraftLan-1.0.0-beta.jar `
+            --main-jar "CreadorCraftLan-1.0.0-beta.jar" `
             --main-class org.CreadoresProgram.CreadorCraftLan.MainActivity `
             --icon "${{ github.workspace }}\appJava\src\main\resources\ic_launcher.ico" `
             --type exe `
