@@ -22,6 +22,6 @@ class APICreadoCraftLan{
                 });
             }
         }.bind(this));
-        window.open(this.urlPrefix + btoa(JSON.stringify(this.jsonToServer)), "_blank");
+        window.open(APICreadoCraftLan.urlPrefix + btoa(JSON.stringify(this.jsonToServer)), "_blank");
     }
 }
