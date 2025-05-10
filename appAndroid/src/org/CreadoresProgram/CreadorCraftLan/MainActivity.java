@@ -65,14 +65,12 @@ public class MainActivity extends Activity {
         startService(serviceServerLan);
     }
     private void onCCLink(String url){
-        if(url.equals("https://creadorcraft.com")){
-            Uri ccpag = Uri.parse("https://creadorcraftcp.blogspot.com/");
-            Intent intent = new Intent(Intent.ACTION_VIEW, ccpag);
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
-            }else{
-                Toast.makeText(this, "No se encontró CreadorCraft.", Toast.LENGTH_SHORT).show();
-            }
+        Uri ccpag = Uri.parse("https://creadorcraftcp.blogspot.com/");
+        Intent intent = new Intent(Intent.ACTION_VIEW, ccpag);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "No se encontró CreadorCraft.", Toast.LENGTH_SHORT).show();
         }
     }
 }
