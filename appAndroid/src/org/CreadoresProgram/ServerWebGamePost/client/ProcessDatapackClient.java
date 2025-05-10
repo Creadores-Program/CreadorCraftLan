@@ -1,13 +1,15 @@
 package org.CreadoresProgram.ServerWebGamePost.client;
 
-import lombok.Getter;
-import lombok.NonNull;
+import androidx.annotation.NonNull;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
 public class ProcessDatapackClient {
-    @Getter
+
     public ServerWebGamePostClient server;
+    public ServerWebGamePostClient getServer() {
+        return server;
+    }
     
     public ProcessDatapackClient(@NonNull ServerWebGamePostClient server) {
         this.server = server;

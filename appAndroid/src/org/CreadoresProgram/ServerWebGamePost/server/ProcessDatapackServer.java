@@ -1,7 +1,6 @@
 package org.CreadoresProgram.ServerWebGamePost.server;
 
-import lombok.NonNull;
-import lombok.Setter;
+import androidx.annotation.NonNull;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import fi.iki.elonen.NanoHTTPD;
@@ -10,8 +9,10 @@ import java.util.HashMap;
 
 public class ProcessDatapackServer {
 
-    @Setter
     public ServerWebGamePostServer server;
+    public void setServer(ServerWebGamePostServer server) {
+        this.server = server;
+    }
 
     public ProcessDatapackServer() {
     }

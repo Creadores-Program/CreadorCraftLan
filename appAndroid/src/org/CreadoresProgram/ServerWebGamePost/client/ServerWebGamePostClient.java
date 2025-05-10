@@ -1,8 +1,6 @@
 package org.CreadoresProgram.ServerWebGamePost.client;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NonNull;
+import androidx.annotation.NonNull;
 import org.json.JSONObject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,13 +13,21 @@ public final class ServerWebGamePostClient {
     private int port;
     private boolean isHttps;
     
-    @Getter
-    @Setter
     public ProcessDatapackClient processDatapacks;
+    public ProcessDatapackClient getProcessDatapacks() {
+        return processDatapacks;
+    }
+    public void setProcessDatapacks(ProcessDatapackClient processDatapacks) {
+        this.processDatapacks = processDatapacks;
+    }
     
-    @Getter
-    @Setter
     public String userAgent = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36";
+    public String getUserAgent() {
+        return userAgent;
+    }
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
 
     private OkHttpClient httpClient = new OkHttpClient();
     

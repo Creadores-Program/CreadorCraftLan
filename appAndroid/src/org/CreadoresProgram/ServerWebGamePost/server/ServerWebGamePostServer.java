@@ -3,12 +3,11 @@ package org.CreadoresProgram.ServerWebGamePost.server;
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.NanoHTTPD.Response;
 import fi.iki.elonen.NanoHTTPD.ResponseException;
-import lombok.Getter;
-import lombok.NonNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -19,22 +18,32 @@ import java.util.HashMap;
 
 public final class ServerWebGamePostServer {
 
-    @Getter
     private int port;
+    public int getPort() {
+        return port;
+    }
 
-    @Getter
     public NanoExtendedServer nanoServer;
+    public NanoExtendedServer getNanoServer() {
+        return nanoServer;
+    }
 
-    @Getter
     public ProcessDatapackServer processDatapacks;
+    public ProcessDatapackServer getProcessDatapacks() {
+        return processDatapacks;
+    }
 
-    @Getter
     private HashMap<String, JSONArray> players;
+    public HashMap<String, JSONArray> getPlayers() {
+        return players;
+    }
 
     public ArrayList<String> bannedIps = new ArrayList<>();
 
-    @Getter
     private ArrayList<String> filters = new ArrayList<>();
+    public ArrayList<String> getFilters() {
+        return filters;
+    }
 
     private String imgSrc;
 

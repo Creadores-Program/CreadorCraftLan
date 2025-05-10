@@ -3,7 +3,7 @@ import org.CreadoresProgram.ServerWebGamePost.server.ServerWebGamePostServer;
 import org.CreadoresProgram.ServerWebGamePost.server.ProcessDatapackServer;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
-import lombok.NonNull;
+import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
