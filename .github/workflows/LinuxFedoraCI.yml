@@ -30,7 +30,6 @@ jobs:
             --type rpm \
             --file-associations resourcesLinux/opencreadorcraftlan.assoc \
             --dest appJava/target/image \
-            --linux-rpm-maintainer "https://github.com/Creadores-Program/" \
             --linux-shortcut \
             --verbose
       - name: UploadArtifact
