@@ -56,7 +56,11 @@ public class ServerWebGamePostServerJS{
             return null;
         }
         for (Map.Entry<String, JSONArray> entry : serversMap.get(idServer).getPlayers().entrySet()) {
-            json.put(entry.getKey(), entry.getValue());
+            try{
+                json.put(entry.getKey(), entry.getValue());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         return json.toString();
     }
