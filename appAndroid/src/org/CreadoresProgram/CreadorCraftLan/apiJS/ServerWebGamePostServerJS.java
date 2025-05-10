@@ -36,7 +36,11 @@ public class ServerWebGamePostServerJS{
     }
     @JavascriptInterface
     public void sendDataPacket(@NonNull int idServer, @NonNull String identifier, @NonNull String datapack){
-        serversMap.get(idServer).sendDataPacket(identifier, new JSONObject(datapack));
+        try{
+            serversMap.get(idServer).sendDataPacket(identifier, new JSONObject(datapack));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     @JavascriptInterface
     public void deletePlayer(@NonNull int idServer, @NonNull String identifier){
@@ -44,7 +48,13 @@ public class ServerWebGamePostServerJS{
     }
     @JavascriptInterface
     public String getPlayers(@NonNull int idServer){
-        JSONObject json = new JSONObject();
+        JSONObject json;
+        try{
+            json = new JSONObject();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
         for (Map.Entry<String, JSONArray> entry : serversMap.get(idServer).getPlayers().entrySet()) {
             json.put(entry.getKey(), entry.getValue());
         }

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import fi.iki.elonen.NanoHTTPD;
 import java.io.IOException;
+import org.json.JSONException;
 import java.util.HashMap;
 
 public class ProcessDatapackServer {
@@ -30,6 +31,7 @@ public class ProcessDatapackServer {
      */
     public String handleRequest(NanoHTTPD.IHTTPSession session, HashMap<String, String> files)
             throws IOException, NanoHTTPD.ResponseException {
+      try{
         if (server.bannedIps.contains(session.getRemoteIpAddress())) {
             throw new NanoHTTPD.ResponseException(NanoHTTPD.Response.Status.FORBIDDEN, "Forbidden");
         }
@@ -52,6 +54,9 @@ public class ProcessDatapackServer {
         reponDatapacks.put("datapacksLot", playerArray);
         server.getPlayers().put(identifier, new JSONArray());
         return reponDatapacks.toString();
+      }catch (JSONException e){
+        throw new NanoHTTPD.ResponseException(NanoHTTPD.Response.Status.BAD_REQUEST, "Bad Request");
+      }
     }
 
     /**

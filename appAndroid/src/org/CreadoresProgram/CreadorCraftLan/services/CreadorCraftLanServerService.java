@@ -49,9 +49,18 @@ public class CreadorCraftLanServerService extends Service{
         String serverFilesBase = intent.getStringExtra("dataFilesJS");
         startWebView();
         String serverFiles = new String(Base64.decode(serverFilesBase, Base64.DEFAULT), StandardCharsets.UTF_8);
-        JSONArray serverFilesJson = new JSONArray(serverFiles);
+        JSONArray serverFilesJson;
+        try{
+            serverFilesJson = new JSONArray(serverFiles);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         for(int i = 0; i < serverFilesJson.length(); i++){
+            try{
             registerFile(serverFilesJson.getJSONObject(i).getString("content"), serverFilesJson.getJSONObject(i).getString("path"));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         startForeground(notificacionId, getNotification());
         evalJS("let maniloa = require('manifest.json');\nlet mainJS = require(maniloa.main);\nmainJS.onLoad();");
@@ -119,7 +128,7 @@ public class CreadorCraftLanServerService extends Service{
         webView.post(new Runnable(){
             @Override
             public void run(){
-                webview.destroy();
+                webView.destroy();
             }
         });
         Log.i(tag, "Apagado y Destruido!");

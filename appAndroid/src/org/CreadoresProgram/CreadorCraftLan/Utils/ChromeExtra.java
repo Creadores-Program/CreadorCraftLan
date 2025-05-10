@@ -47,5 +47,6 @@ public class ChromeExtra extends WebChromeClient{
                 Log.w(tag, consoleMessage.message());
                 break;
         }
+        return true;
     }
 }

@@ -45,7 +45,7 @@ public final class ServerWebGamePostClient {
             String url = prefix + this.domain + ":" + this.port + "/ServerWebGamePost";
             
             MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-            RequestBody requestBody = RequestBody.create(datapackStr, mediaType);
+            RequestBody requestBody = RequestBody.create(mediaType, datapackStr);
             
             Request request = new Request.Builder()
                     .url(url)
