@@ -1,0 +1,10 @@
+{
+    "name": "DemoCreadorCraft Lan",
+    "version": "1.0",
+    "description": "DemoCreadorCraft Lan",
+    "mainHtml": "mainHtml.html",
+    "mainJS": "main.js",
+    "mainCSS": "style.css",
+    "onLan": true,
+    "onServerWebGamePost": true
+}

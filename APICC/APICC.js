@@ -1,4 +1,4 @@
-class APICreadoCraftLan{
+class APICreadorCraftLan{
     static urlPrefix = "OpenCreadorCraftLan://";
     carpeta = "";
     jsonToServer = [];
