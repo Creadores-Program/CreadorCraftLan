@@ -5,6 +5,6 @@
     "mainHtml": "mainHtml.html",
     "mainJS": "main.js",
     "mainCSS": "style.css",
-    "onLan": true,
+    "onLanAPI": true,
     "onServerWebGamePost": true
 }
